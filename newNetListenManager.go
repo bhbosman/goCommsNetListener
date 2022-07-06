@@ -16,17 +16,17 @@ import (
 func NewNetListenManager(
 	params struct {
 		fx.In
-		UseProxy                                 bool     `name:"UseProxy"`
-		ConnectionUrl                            *url.URL `name:"ConnectionUrl"`
-		ProxyUrl                                 *url.URL `name:"ProxyUrl"`
-		ListenerAccept                           ISshListenerAccept
-		OnCreateConnection                       goCommsDefinitions.IOnCreateConnection
-		ConnectionManager                        goConnectionManager.IService
-		CancelCtx                                context.Context
-		CancelFunction                           context.CancelFunc
-		Settings                                 *netListenManagerSettings
-		ZapLogger                                *zap.Logger
-		StackName                                string `name:"StackName"`
+		UseProxy           bool     `name:"UseProxy"`
+		ConnectionUrl      *url.URL `name:"ConnectionUrl"`
+		ProxyUrl           *url.URL `name:"ProxyUrl"`
+		ListenerAccept     ISshListenerAccept
+		OnCreateConnection goCommsDefinitions.IOnCreateConnection
+		ConnectionManager  goConnectionManager.IService
+		CancelCtx          context.Context
+		CancelFunction     context.CancelFunc
+		Settings           *netListenManagerSettings
+		ZapLogger          *zap.Logger
+		//StackName                                string `name:"StackName"`
 		ConnectionName                           string `name:"ConnectionName"`
 		ConnectionInstancePrefix                 string `name:"ConnectionInstancePrefix"`
 		UniqueSessionNumber                      interfaces.IUniqueReferenceService
@@ -50,7 +50,7 @@ func NewNetListenManager(
 		params.ConnectionUrl,
 		params.CancelCtx,
 		params.CancelFunction,
-		params.StackName,
+		//params.StackName,
 		params.ConnectionManager,
 		params.Settings.userContext,
 		params.ZapLogger,
