@@ -3,22 +3,22 @@ module github.com/bhbosman/goCommsNetListener
 go 1.18
 
 require (
-	github.com/bhbosman/goCommsDefinitions v0.0.0-20220628093721-7191a8828f7f
-	github.com/bhbosman/goConnectionManager v0.0.0-20220628055237-4a995b1ae47c
-	github.com/bhbosman/gocommon v0.0.0-20220627073905-4951fb81c325
+	github.com/bhbosman/goCommsDefinitions v0.0.0-20220707044904-ceb8c2737904
+	github.com/bhbosman/goConnectionManager v0.0.0-20220705103338-3f5a18784e60
+	github.com/bhbosman/gocommon v0.0.0-20220707045107-1b6a40e49fd5
 	github.com/bhbosman/gocomms v0.0.0-20220614200341-e167364b814f
 	github.com/golang/mock v1.6.0
-	github.com/stretchr/testify v1.7.0
 	go.uber.org/fx v1.17.1
 	go.uber.org/multierr v1.6.0
 	go.uber.org/zap v1.21.0
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 )
 
+require github.com/stretchr/testify v1.7.0 // indirect
+
 require (
 	github.com/bhbosman/goerrors v0.0.0-20220623084908-4d7bbcd178cf // indirect
-	github.com/bhbosman/gologging v0.0.0-20200921180328-d29fc55c00bc // indirect
-	github.com/bhbosman/gomessageblock v0.0.0-20210901070622-be36a3f8d303 // indirect
+	github.com/bhbosman/gomessageblock v0.0.0-20220617132215-32f430d7de62 // indirect
 	github.com/bhbosman/goprotoextra v0.0.2-0.20210817141206-117becbef7c7 // indirect
 	github.com/cenkalti/backoff/v4 v4.0.0 // indirect
 	github.com/cskr/pubsub v1.0.2 // indirect
