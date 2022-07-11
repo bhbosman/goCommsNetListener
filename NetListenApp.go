@@ -18,7 +18,7 @@ func NewNetListenApp(
 	UseProxy bool,
 	ProxyUrl *url.URL,
 	ConnectionUrl *url.URL,
-	stackName string,
+	//stackName string,
 	settings ...common.INetManagerSettingsApply) common.NetAppFuncInParamsCallback {
 	return func(params common.NetAppFuncInParams) messages.CreateAppCallback {
 		return messages.CreateAppCallback{
@@ -64,7 +64,7 @@ func NewNetListenApp(
 					UseProxy,
 					ProxyUrl,
 					ConnectionUrl,
-					stackName,
+					//stackName,
 					params,
 					callbackForConnectionInstance,
 					fx.Options(netListenSettings.MoreOptions...),

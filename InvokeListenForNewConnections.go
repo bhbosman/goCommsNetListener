@@ -5,12 +5,14 @@ import (
 	"go.uber.org/fx"
 )
 
-func invokeListenForNewConnections(params struct {
-	fx.In
-	NetManager *NetListenManager
-	CancelFunc context.CancelFunc
-	Lifecycle  fx.Lifecycle
-}) {
+func invokeListenForNewConnections(
+	params struct {
+		fx.In
+		NetManager *NetListenManager
+		CancelFunc context.CancelFunc
+		Lifecycle  fx.Lifecycle
+	},
+) {
 	params.Lifecycle.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			return params.NetManager.ListenForNewConnections()
