@@ -89,7 +89,7 @@ func (self *NetListenManager) acceptNewClientConnection(
 	connCancelFunc context.CancelFunc,
 ) error {
 	return self.GoFunctionCounter.GoRun("NetListenManager.acceptNewClientConnection.03",
-		func(data interface{}) {
+		func(_ interface{}) {
 			self.ZapLogger.Info(fmt.Sprintf("Accepted %s-%s", conn.RemoteAddr(), conn.LocalAddr()),
 				zap.String("Remote Address", conn.RemoteAddr().String()),
 				zap.String("LocalAddr Address", conn.LocalAddr().String()))
@@ -129,7 +129,7 @@ func (self *NetListenManager) acceptNewClientConnection(
 			}
 
 			_ = self.GoFunctionCounter.GoRun("NetListenManager.acceptNewClientConnection.02",
-				func(data interface{}) {
+				func(_ interface{}) {
 					<-connectionAppCtx.Done()
 					// TODO: Adhere to timeouts
 					errInGoRoutine := connectionApp.Stop(context.Background())
