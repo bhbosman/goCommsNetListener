@@ -35,7 +35,7 @@ func (self *NetListenManager) ListenForNewConnections() error {
 
 	return self.GoFunctionCounter.GoRun(
 		"NetListenManager.ListenForNewConnections",
-		func(_ interface{}) {
+		func() {
 			//
 			n := 0
 			sem := semaphore.NewWeighted(int64(self.MaxConnections))
@@ -70,7 +70,6 @@ func (self *NetListenManager) ListenForNewConnections() error {
 			//
 			self.ZapLogger.Info("Leaving accept loop")
 		},
-		nil,
 	)
 }
 
@@ -89,7 +88,7 @@ func (self *NetListenManager) acceptNewClientConnection(
 	connCancelFunc context.CancelFunc,
 ) error {
 	return self.GoFunctionCounter.GoRun("NetListenManager.acceptNewClientConnection.03",
-		func(_ interface{}) {
+		func() {
 			self.ZapLogger.Info(fmt.Sprintf("Accepted %s-%s", conn.RemoteAddr(), conn.LocalAddr()),
 				zap.String("Remote Address", conn.RemoteAddr().String()),
 				zap.String("LocalAddr Address", conn.LocalAddr().String()))
@@ -129,7 +128,7 @@ func (self *NetListenManager) acceptNewClientConnection(
 			}
 
 			_ = self.GoFunctionCounter.GoRun("NetListenManager.acceptNewClientConnection.02",
-				func(_ interface{}) {
+				func() {
 					<-connectionAppCtx.Done()
 					// TODO: Adhere to timeouts
 					errInGoRoutine := connectionApp.Stop(context.Background())
@@ -143,10 +142,8 @@ func (self *NetListenManager) acceptNewClientConnection(
 					}
 					connCancelFunc()
 				},
-				nil,
 			)
 		},
-		nil,
 	)
 }
 
