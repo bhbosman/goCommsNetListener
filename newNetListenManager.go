@@ -2,7 +2,6 @@ package goCommsNetListener
 
 import (
 	"context"
-	"github.com/bhbosman/goCommsDefinitions"
 	"github.com/bhbosman/goConnectionManager"
 	"github.com/bhbosman/gocommon/GoFunctionCounter"
 	"github.com/bhbosman/gocommon/Services/IFxService"
@@ -16,17 +15,14 @@ import (
 func NewNetListenManager(
 	params struct {
 		fx.In
-		UseProxy           bool     `name:"UseProxy"`
-		ConnectionUrl      *url.URL `name:"ConnectionUrl"`
-		ProxyUrl           *url.URL `name:"ProxyUrl"`
-		ListenerAccept     ISshListenerAccept
-		OnCreateConnection goCommsDefinitions.IOnCreateConnection
-		ConnectionManager  goConnectionManager.IService
-		CancelCtx          context.Context
-		CancelFunction     context.CancelFunc
-		Settings           *netListenManagerSettings
-		ZapLogger          *zap.Logger
-		//StackName                                string `name:"StackName"`
+		UseProxy                                 bool     `name:"UseProxy"`
+		ConnectionUrl                            *url.URL `name:"ConnectionUrl"`
+		ProxyUrl                                 *url.URL `name:"ProxyUrl"`
+		ListenerAccept                           ISshListenerAccept
+		ConnectionManager                        goConnectionManager.IService
+		CancelCtx                                context.Context
+		Settings                                 *netListenManagerSettings
+		ZapLogger                                *zap.Logger
 		ConnectionName                           string `name:"ConnectionName"`
 		ConnectionInstancePrefix                 string `name:"ConnectionInstancePrefix"`
 		UniqueSessionNumber                      interfaces.IUniqueReferenceService
@@ -49,8 +45,6 @@ func NewNetListenManager(
 		params.ProxyUrl,
 		params.ConnectionUrl,
 		params.CancelCtx,
-		params.CancelFunction,
-		//params.StackName,
 		params.ConnectionManager,
 		params.Settings.userContext,
 		params.ZapLogger,
@@ -66,8 +60,8 @@ func NewNetListenManager(
 		ConnNetManager: netBase.ConnNetManager{
 			NetManager: netManager,
 		},
-		Listener:           params.ListenerAccept,
-		MaxConnections:     params.Settings.MaxConnections,
-		OnCreateConnection: params.OnCreateConnection,
+		Listener:       params.ListenerAccept,
+		MaxConnections: params.Settings.MaxConnections,
+		//OnCreateConnection: params.OnCreateConnection,
 	}, nil
 }

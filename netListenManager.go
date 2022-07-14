@@ -3,7 +3,6 @@ package goCommsNetListener
 import (
 	"context"
 	"fmt"
-	"github.com/bhbosman/goCommsDefinitions"
 	"github.com/bhbosman/gocommon/GoFunctionCounter"
 	"github.com/bhbosman/gocommon/Services/IFxService"
 	"github.com/bhbosman/gocommon/model"
@@ -17,9 +16,9 @@ import (
 
 type NetListenManager struct {
 	netBase.ConnNetManager
-	Listener           ISshListenerAccept
-	MaxConnections     int
-	OnCreateConnection goCommsDefinitions.IOnCreateConnection
+	Listener       ISshListenerAccept
+	MaxConnections int
+	//OnCreateConnection goCommsDefinitions.IOnCreateConnection
 }
 
 func (self *NetListenManager) ListenForNewConnections() error {
@@ -56,7 +55,12 @@ func (self *NetListenManager) ListenForNewConnections() error {
 				}
 				if sem.TryAcquire(1) {
 					self.ZapLogger.Info("Accepted connection...")
-					conn, _ = common.NewNetConnWithSemaphoreWrapper(conn, sem)
+					conn, _ = common.NewNetConnWithSemaphoreWrapper(
+						conn,
+						func() {
+							sem.Release(1)
+						},
+					)
 					_ = self.acceptNewClientConnection(
 						self.UniqueSessionNumber.Next(self.ConnectionInstancePrefix),
 						self.GoFunctionCounter,
@@ -92,56 +96,61 @@ func (self *NetListenManager) acceptNewClientConnection(
 			self.ZapLogger.Info(fmt.Sprintf("Accepted %s-%s", conn.RemoteAddr(), conn.LocalAddr()),
 				zap.String("Remote Address", conn.RemoteAddr().String()),
 				zap.String("LocalAddr Address", conn.LocalAddr().String()))
-			connectionApp, connectionAppCtx, connectionApCancelFunc := self.NewConnectionInstance(
+
+			connectionInstance := netBase.NewConnectionInstance(
+				self.ConnectionUrl,
+				self.UniqueSessionNumber,
+				self.ConnectionManager,
+				self.UserContext,
+				self.CancelCtx,
+				self.AdditionalFxOptionsForConnectionInstance,
+				self.ZapLogger,
+			)
+			connectionApp, instanceAppCtx, cancellationContext, err := connectionInstance.NewConnectionInstance(
 				uniqueReference,
 				goFunctionCounter,
 				model.ServerConnection,
 				conn,
 			)
-			onErrorCall := func(err error) {
+			if instanceAppCtx != nil {
+				err = multierr.Append(err, instanceAppCtx.Err())
+			}
+			onErr := func() {
 				if connCancelFunc != nil {
 					connCancelFunc()
 				}
-				if connectionApCancelFunc != nil {
-					connectionApCancelFunc()
+				if cancellationContext != nil {
+					cancellationContext.Cancel()
 				}
 				err = multierr.Append(err, conn.Close())
-				self.ZapLogger.Error("Error in fxApp.Err() when creating NewConnectionInstance()",
-					zap.Error(err))
-			}
-			err := connectionApp.Err()
-			if connectionAppCtx != nil {
-				err = multierr.Append(err, connectionAppCtx.Err())
-			}
-			if self.OnCreateConnection != nil {
-				self.OnCreateConnection.OnCreateConnection(uniqueReference, err, connectionAppCtx, connectionApCancelFunc)
 			}
 			if err != nil {
-				onErrorCall(err)
+				onErr()
 				return
 			}
-			// TODO: Adhere to timeouts
 			err = connectionApp.Start(context.Background())
 			if err != nil {
-				onErrorCall(err)
+				onErr()
 				return
 			}
-
-			_ = self.GoFunctionCounter.GoRun("NetListenManager.acceptNewClientConnection.02",
-				func() {
-					<-connectionAppCtx.Done()
-					// TODO: Adhere to timeouts
-					errInGoRoutine := connectionApp.Stop(context.Background())
-					if errInGoRoutine != nil {
-						self.ZapLogger.Error(
-							"Stopping error. not really a problem. informational",
-							zap.Error(errInGoRoutine))
+			_ = cancellationContext.Add(
+				func() func() {
+					b := false
+					return func() {
+						if !b {
+							b = true
+							errInGoRoutine := connectionApp.Stop(context.Background())
+							if errInGoRoutine != nil {
+								self.ZapLogger.Error(
+									"Stopping error. not really a problem. informational",
+									zap.Error(errInGoRoutine))
+							}
+							if errInGoRoutine != nil {
+								onErr()
+							}
+						}
 					}
-					if connectionApCancelFunc != nil {
-						connectionApCancelFunc()
-					}
-					connCancelFunc()
-				},
+				}(),
 			)
 		},
 	)

@@ -2,6 +2,7 @@ package goCommsNetListener
 
 import (
 	"context"
+	"github.com/bhbosman/goCommsDefinitions"
 	"github.com/bhbosman/gocommon/messages"
 	"github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocomms/common"
@@ -18,14 +19,13 @@ func NewNetListenApp(
 	UseProxy bool,
 	ProxyUrl *url.URL,
 	ConnectionUrl *url.URL,
-	//stackName string,
 	settings ...common.INetManagerSettingsApply) common.NetAppFuncInParamsCallback {
 	return func(params common.NetAppFuncInParams) messages.CreateAppCallback {
 		return messages.CreateAppCallback{
 			ServiceId:         serviceIdentifier,
 			ServiceDependency: serviceDependentOn,
 			Name:              name,
-			Callback: func() (*fx.App, context.CancelFunc, error) {
+			Callback: func() (messages.IApp, context.CancelFunc, error) {
 				cancelFunc := func() {}
 				netListenSettings := &netListenManagerSettings{
 					NetManagerSettings:    common.NewNetManagerSettings(512),
@@ -61,16 +61,15 @@ func NewNetListenApp(
 					time.Hour,
 					name,
 					connectionInstancePrefix,
-					UseProxy,
-					ProxyUrl,
-					ConnectionUrl,
-					//stackName,
 					params,
 					callbackForConnectionInstance,
 					fx.Options(netListenSettings.MoreOptions...),
 					fx.Supply(netListenSettings),
+					goCommsDefinitions.ProvideUrl("ConnectionUrl", ConnectionUrl),
+					goCommsDefinitions.ProvideUrl("ProxyUrl", ProxyUrl),
+					goCommsDefinitions.ProvideBool("UseProxy", UseProxy),
+
 					fx.Provide(fx.Annotated{Target: NewNetListenManager}),
-					fx.Provide(fx.Annotated{Target: netListenSettings.OnCreateConnectionFactory}),
 					fx.Provide(fx.Annotated{Target: netListenSettings.listenerAcceptFactory}),
 					fx.Provide(fx.Annotated{Target: netListenSettings.netListenerFactory}),
 					fx.Invoke(invokeListenForNewConnections),
