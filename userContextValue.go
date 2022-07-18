@@ -13,7 +13,7 @@ func (self userContextValue) ApplyNetManagerSettings(settings *common.NetManager
 }
 
 func (self userContextValue) apply(settings *netListenManagerSettings) error {
-	settings.userContext = self.userContext
+	//settings.userContext = self.userContext
 	return nil
 }
 

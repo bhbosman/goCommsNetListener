@@ -101,7 +101,7 @@ func (self *NetListenManager) acceptNewClientConnection(
 				self.ConnectionUrl,
 				self.UniqueSessionNumber,
 				self.ConnectionManager,
-				self.UserContext,
+				//self.UserContext,
 				self.CancelCtx,
 				self.AdditionalFxOptionsForConnectionInstance,
 				self.ZapLogger,

@@ -7,7 +7,7 @@ import (
 
 type netListenManagerSettings struct {
 	common.NetManagerSettings
-	userContext           interface{}
+	//userContext           interface{}
 	netListenerFactory    interface{} //func() (net.Listener, error)
 	listenerAcceptFactory interface{} //func(ISshListenerAccept, err)
 }

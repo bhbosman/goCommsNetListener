@@ -46,7 +46,7 @@ func NewNetListenManager(
 		params.ConnectionUrl,
 		params.CancelCtx,
 		params.ConnectionManager,
-		params.Settings.userContext,
+		//params.Settings.userContext,
 		params.ZapLogger,
 		params.UniqueSessionNumber,
 		params.AdditionalFxOptionsForConnectionInstance,
