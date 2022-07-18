@@ -28,8 +28,7 @@ func NewNetListenApp(
 			Callback: func() (messages.IApp, context.CancelFunc, error) {
 				cancelFunc := func() {}
 				netListenSettings := &netListenManagerSettings{
-					NetManagerSettings: common.NewNetManagerSettings(512),
-					//userContext:           nil,
+					NetManagerSettings:    common.NewNetManagerSettings(512),
 					netListenerFactory:    ProvideCreateListenResource,
 					listenerAcceptFactory: ProvideCreateListenAcceptResource,
 				}
