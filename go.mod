@@ -3,9 +3,9 @@ module github.com/bhbosman/goCommsNetListener
 go 1.18
 
 require (
-	github.com/bhbosman/goCommsDefinitions v0.0.0-20220707044904-ceb8c2737904
-	github.com/bhbosman/goConnectionManager v0.0.0-20220705103338-3f5a18784e60
-	github.com/bhbosman/gocommon v0.0.0-20220707045107-1b6a40e49fd5
+	github.com/bhbosman/goCommsDefinitions v0.0.0-20220718082038-833ca2ad99e2
+	github.com/bhbosman/goConnectionManager v0.0.0-20220721070628-0f4b3c036d93
+	github.com/bhbosman/gocommon v0.0.0-20220718213201-2711fee77ae4
 	github.com/bhbosman/gocomms v0.0.0-20220614200341-e167364b814f
 	github.com/golang/mock v1.6.0
 	go.uber.org/fx v1.17.1
