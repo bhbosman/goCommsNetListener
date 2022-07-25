@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/bhbosman/goCommsDefinitions"
 	"github.com/bhbosman/gocommon/messages"
-	"github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocomms/common"
 	"go.uber.org/fx"
 	"net/url"
@@ -13,8 +12,6 @@ import (
 
 func NewNetListenApp(
 	name string,
-	serviceIdentifier model.ServiceIdentifier,
-	serviceDependentOn model.ServiceIdentifier,
 	connectionInstancePrefix string,
 	UseProxy bool,
 	ProxyUrl *url.URL,
@@ -22,9 +19,7 @@ func NewNetListenApp(
 	settings ...common.INetManagerSettingsApply) common.NetAppFuncInParamsCallback {
 	return func(params common.NetAppFuncInParams) messages.CreateAppCallback {
 		return messages.CreateAppCallback{
-			ServiceId:         serviceIdentifier,
-			ServiceDependency: serviceDependentOn,
-			Name:              name,
+			Name: name,
 			Callback: func() (messages.IApp, context.CancelFunc, error) {
 				cancelFunc := func() {}
 				netListenSettings := &netListenManagerSettings{
