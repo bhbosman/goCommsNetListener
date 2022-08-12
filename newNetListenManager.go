@@ -22,6 +22,7 @@ func NewNetListenManager(
 		ListenerAccept                           ISshListenerAccept
 		ConnectionManager                        goConnectionManager.IService
 		CancelCtx                                context.Context
+		CancellationContext                      goCommsDefinitions.ICancellationContext
 		Settings                                 *netListenManagerSettings
 		ZapLogger                                *zap.Logger
 		ConnectionName                           string `name:"ConnectionName"`
@@ -29,7 +30,6 @@ func NewNetListenManager(
 		UniqueSessionNumber                      interfaces.IUniqueReferenceService
 		AdditionalFxOptionsForConnectionInstance func() fx.Option
 		GoFunctionCounter                        GoFunctionCounter.IService
-		CancellationContext                      goCommsDefinitions.ICancellationContext
 	},
 ) (*NetListenManager, error) {
 
@@ -47,6 +47,7 @@ func NewNetListenManager(
 		params.ProxyUrl,
 		params.ConnectionUrl,
 		params.CancelCtx,
+		params.CancellationContext,
 		params.ConnectionManager,
 		params.ZapLogger,
 		params.UniqueSessionNumber,
