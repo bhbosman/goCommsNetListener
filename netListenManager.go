@@ -134,14 +134,14 @@ func (self *NetListenManager) acceptNewClientConnection(
 				onErr()
 				return
 			}
-			connectionShutdown := registerConnectionShutdown(connectionApp, self.ZapLogger, onErr)
-			_ = cancellationContext.Add(connectionShutdown)
-			_ = self.CancellationContext.Add(connectionShutdown)
+			connectionShutdown := registerConnectionShutdown(uniqueReference, connectionApp, self.ZapLogger, onErr, self.CancellationContext)
+			_ = cancellationContext.Add(uniqueReference, connectionShutdown)
+			_ = self.CancellationContext.Add(uniqueReference, connectionShutdown)
 		},
 	)
 }
 
-func registerConnectionShutdown(connectionApp messages.IApp, logger *zap.Logger, onErr func()) func() {
+func registerConnectionShutdown(connectionId string, connectionApp messages.IApp, logger *zap.Logger, onErr func(), CancellationContext ...goCommsDefinitions.ICancellationContext) func() {
 	b := false
 	return func() {
 		if !b {
@@ -154,6 +154,9 @@ func registerConnectionShutdown(connectionApp messages.IApp, logger *zap.Logger,
 			}
 			if errInGoRoutine != nil {
 				onErr()
+			}
+			for _, instance := range CancellationContext {
+				_ = instance.Remove(connectionId)
 			}
 		}
 	}
