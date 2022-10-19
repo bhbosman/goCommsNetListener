@@ -3,18 +3,18 @@ module github.com/bhbosman/goCommsNetListener
 go 1.18
 
 require (
-	github.com/bhbosman/goCommsDefinitions v0.0.0-20220718082038-833ca2ad99e2
+	github.com/bhbosman/goCommsDefinitions v0.0.0-20220801175552-c5aa68065af3
 	github.com/bhbosman/goConnectionManager v0.0.0-20220721070628-0f4b3c036d93
 	github.com/bhbosman/gocommon v0.0.0-20220718213201-2711fee77ae4
 	github.com/bhbosman/gocomms v0.0.0-20220614200341-e167364b814f
 	github.com/golang/mock v1.6.0
-	go.uber.org/fx v1.17.1
+	go.uber.org/fx v1.18.2
 	go.uber.org/multierr v1.6.0
 	go.uber.org/zap v1.21.0
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 )
 
-require github.com/stretchr/testify v1.7.0 // indirect
+require github.com/stretchr/testify v1.7.1 // indirect
 
 require (
 	github.com/bhbosman/goerrors v0.0.0-20220623084908-4d7bbcd178cf // indirect
@@ -30,10 +30,10 @@ require (
 	github.com/stretchr/objx v0.1.0 // indirect
 	github.com/teivah/onecontext v0.0.0-20200513185103-40f981bfd775 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
-	go.uber.org/dig v1.14.0 // indirect
+	go.uber.org/dig v1.15.0 // indirect
 	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f // indirect
 	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
 replace github.com/bhbosman/gocomms => ../gocomms
