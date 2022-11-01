@@ -93,55 +93,59 @@ func (self *NetListenManager) acceptNewClientConnection(
 	conn net.Conn,
 	connCancelFunc context.CancelFunc,
 ) error {
-	return self.GoFunctionCounter.GoRun("NetListenManager.acceptNewClientConnection.03",
-		func() {
-			self.ZapLogger.Info(fmt.Sprintf("Accepted %s-%s", conn.RemoteAddr(), conn.LocalAddr()),
-				zap.String("Remote Address", conn.RemoteAddr().String()),
-				zap.String("LocalAddr Address", conn.LocalAddr().String()))
+	vv := func() {
+		self.ZapLogger.Info(fmt.Sprintf("Accepted %s-%s", conn.RemoteAddr(), conn.LocalAddr()),
+			zap.String("Remote Address", conn.RemoteAddr().String()),
+			zap.String("LocalAddr Address", conn.LocalAddr().String()))
 
-			connectionInstance := netBase.NewConnectionInstance(
-				self.ConnectionUrl,
-				self.UniqueSessionNumber,
-				self.ConnectionManager,
-				self.CancelCtx,
-				self.AdditionalFxOptionsForConnectionInstance,
-				self.ZapLogger,
-			)
-			connectionApp, instanceAppCtx, cancellationContext, err := connectionInstance.NewConnectionInstance(
-				uniqueReference,
-				goFunctionCounter,
-				model.ServerConnection,
-				conn,
-			)
-			if instanceAppCtx != nil {
-				err = multierr.Append(err, instanceAppCtx.Err())
+		connectionInstance := netBase.NewConnectionInstance(
+			self.ConnectionUrl,
+			self.UniqueSessionNumber,
+			self.ConnectionManager,
+			self.CancelCtx,
+			self.AdditionalFxOptionsForConnectionInstance,
+			self.ZapLogger,
+		)
+		connectionApp, instanceAppCtx, cancellationContext, err := connectionInstance.NewConnectionInstance(
+			uniqueReference,
+			goFunctionCounter,
+			model.ServerConnection,
+			conn,
+		)
+		if instanceAppCtx != nil {
+			err = multierr.Append(err, instanceAppCtx.Err())
+		}
+		onErr := func() {
+			if connCancelFunc != nil {
+				connCancelFunc()
 			}
-			onErr := func() {
-				if connCancelFunc != nil {
-					connCancelFunc()
-				}
-				if cancellationContext != nil {
-					cancellationContext.Cancel()
-				}
-				err = multierr.Append(err, conn.Close())
+			if cancellationContext != nil {
+				cancellationContext.Cancel()
 			}
-			if err != nil {
-				onErr()
-				return
-			}
-			err = connectionApp.Start(context.Background())
-			if err != nil {
-				onErr()
-				return
-			}
-			connectionShutdown := registerConnectionShutdown(uniqueReference, connectionApp, self.ZapLogger, onErr, self.CancellationContext)
-			b, _ := cancellationContext.Add(uniqueReference, connectionShutdown)
-			if !b {
-				_, _ = self.CancellationContext.Add(uniqueReference, connectionShutdown)
-			}
+			err = multierr.Append(err, conn.Close())
+		}
+		if err != nil {
+			onErr()
+			return
+		}
+		err = connectionApp.Start(context.Background())
+		if err != nil {
+			onErr()
+			return
+		}
+		connectionShutdown := registerConnectionShutdown(uniqueReference, connectionApp, self.ZapLogger, onErr, self.CancellationContext)
+		b, _ := cancellationContext.Add(uniqueReference, connectionShutdown)
+		if !b {
+			_, _ = self.CancellationContext.Add(uniqueReference, connectionShutdown)
+		}
 
-		},
+	}
+	return self.GoFunctionCounter.GoRun(
+		"NetListenManager.acceptNewClientConnection.03",
+		vv,
 	)
+	//vv()
+	//return nil
 }
 
 func registerConnectionShutdown(connectionId string, connectionApp messages.IApp, logger *zap.Logger, onErr func(), CancellationContext ...goCommsDefinitions.ICancellationContext) func() {
