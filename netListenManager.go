@@ -80,7 +80,7 @@ func (self *NetListenManager) ListenForNewConnections() error {
 }
 
 // acceptNewClientConnection will create the new connection instance. uber/fx wraps the connection, and will take care
-//of its initialization and de-initialization.
+// of its initialization and de-initialization.
 //
 // net.Con parameter is the new connection that was acquired.
 // context.CancelFunc is a context construct that was created when the connection was formed. This will be called when
@@ -135,8 +135,11 @@ func (self *NetListenManager) acceptNewClientConnection(
 				return
 			}
 			connectionShutdown := registerConnectionShutdown(uniqueReference, connectionApp, self.ZapLogger, onErr, self.CancellationContext)
-			_ = cancellationContext.Add(uniqueReference, connectionShutdown)
-			_ = self.CancellationContext.Add(uniqueReference, connectionShutdown)
+			b, _ := cancellationContext.Add(uniqueReference, connectionShutdown)
+			if !b {
+				_, _ = self.CancellationContext.Add(uniqueReference, connectionShutdown)
+			}
+
 		},
 	)
 }
