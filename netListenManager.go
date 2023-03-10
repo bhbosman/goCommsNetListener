@@ -148,9 +148,15 @@ func (self *NetListenManager) acceptNewClientConnection(
 	//return nil
 }
 
-func registerConnectionShutdown(connectionId string, connectionApp messages.IApp, logger *zap.Logger, onErr func(), CancellationContext ...goCommsDefinitions.ICancellationContext) func() {
+func registerConnectionShutdown(
+	connectionId string,
+	connectionApp messages.IApp,
+	logger *zap.Logger,
+	onErr func(),
+	CancellationContext ...goCommsDefinitions.ICancellationContext,
+) func(cancelCtx goCommsDefinitions.ICancellationContext) {
 	b := false
-	return func() {
+	return func(cancelCtx goCommsDefinitions.ICancellationContext) {
 		if !b {
 			b = true
 			errInGoRoutine := connectionApp.Stop(context.Background())
