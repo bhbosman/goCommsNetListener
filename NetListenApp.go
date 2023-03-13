@@ -21,7 +21,7 @@ func NewNetListenApp(
 		return messages.CreateAppCallback{
 			Name: name,
 			Callback: func() (messages.IApp, context.CancelFunc, error) {
-				cancelFunc := func() {}
+
 				netListenSettings := &netListenManagerSettings{
 					NetManagerSettings: common.NewNetManagerSettings(512),
 				}
@@ -30,16 +30,9 @@ func NewNetListenApp(
 					if setting == nil {
 						continue
 					}
-					if listenAppSettingsApply, ok := setting.(iListenAppSettingsApply); ok {
-						err := listenAppSettingsApply.apply(netListenSettings)
-						if err != nil {
-							return nil, cancelFunc, err
-						}
-					} else {
-						err := setting.ApplyNetManagerSettings(&netListenSettings.NetManagerSettings)
-						if err != nil {
-							return nil, cancelFunc, err
-						}
+					err := setting.ApplyNetManagerSettings(&netListenSettings.NetManagerSettings)
+					if err != nil {
+						return nil, func() {}, err
 					}
 				}
 
@@ -64,10 +57,11 @@ func NewNetListenApp(
 					ProvideCreateListenAcceptResource(),
 					ProvideCreateListenResource(),
 					fx.Invoke(InvokeStartConnectionManagerListenForConnections),
+					goCommsDefinitions.InvokeCancelContext(),
+					goCommsDefinitions.InvokeListenerClose(),
 				)
 				fxApp := fx.New(options)
 				return fxApp, func() {
-
 				}, fxApp.Err()
 			},
 		}

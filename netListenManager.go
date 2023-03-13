@@ -14,6 +14,7 @@ import (
 	"go.uber.org/zap"
 	"golang.org/x/sync/semaphore"
 	"net"
+	"sync"
 )
 
 type NetListenManager struct {
@@ -155,10 +156,14 @@ func registerConnectionShutdown(
 	logger *zap.Logger,
 	CancellationContext ...goCommsDefinitions.ICancellationContext,
 ) func(cancelCtx goCommsDefinitions.ICancellationContext) {
-	b := false
+	mutex := sync.Mutex{}
+	cancelCalled := false
 	return func(cancelCtx goCommsDefinitions.ICancellationContext) {
+		mutex.Lock()
+		b := cancelCalled
+		cancelCalled = true
+		mutex.Unlock()
 		if !b {
-			b = true
 			errInGoRoutine := connectionApp.Stop(context.Background())
 			if errInGoRoutine != nil {
 				logger.Error(
