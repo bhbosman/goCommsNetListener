@@ -19,7 +19,7 @@ func NewNetListenManager(
 		UseProxy                                 bool     `name:"UseProxy"`
 		ConnectionUrl                            *url.URL `name:"ConnectionUrl"`
 		ProxyUrl                                 *url.URL `name:"ProxyUrl"`
-		ListenerAccept                           ISshListenerAccept
+		ListenerAccept                           IListenerAccept
 		ConnectionManager                        goConnectionManager.IService
 		CancelCtx                                context.Context
 		CancellationContext                      goCommsDefinitions.ICancellationContext

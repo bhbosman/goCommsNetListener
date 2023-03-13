@@ -12,7 +12,7 @@ type netListenManagerSettings struct {
 	listenerAcceptFactory interface{} //func(ISshListenerAccept, err)
 }
 
-func (self *netListenManagerSettings) setListenerAcceptFactory(listenerAcceptFactory func(listener net.Listener) (ISshListenerAccept, error)) {
+func (self *netListenManagerSettings) setListenerAcceptFactory(listenerAcceptFactory func(listener net.Listener) (IListenerAccept, error)) {
 	self.listenerAcceptFactory = listenerAcceptFactory
 }
 

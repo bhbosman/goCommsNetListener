@@ -9,7 +9,7 @@ func ProvideCreateListenAcceptResource(
 	params struct {
 		fx.In
 		Listener net.Listener
-	}) (ISshListenerAccept, error) {
+	}) (IListenerAccept, error) {
 	return &listenerAccept{
 		Listener: params.Listener,
 	}, nil

@@ -5,6 +5,6 @@ import (
 	"net"
 )
 
-type ISshListenerAccept interface {
+type IListenerAccept interface {
 	AcceptWithContext() (net.Conn, context.CancelFunc, error)
 }

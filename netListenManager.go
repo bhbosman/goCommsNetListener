@@ -18,7 +18,7 @@ import (
 
 type NetListenManager struct {
 	netBase.ConnNetManager
-	Listener            ISshListenerAccept
+	Listener            IListenerAccept
 	MaxConnections      int
 	CancellationContext goCommsDefinitions.ICancellationContext
 }
@@ -133,12 +133,13 @@ func (self *NetListenManager) acceptNewClientConnection(
 			onErr()
 			return
 		}
-		connectionShutdown := registerConnectionShutdown(uniqueReference, connectionApp, self.ZapLogger, onErr, self.CancellationContext)
-		b, _ := cancellationContext.Add(uniqueReference, connectionShutdown)
-		if !b {
-			_, _ = self.CancellationContext.Add(uniqueReference, connectionShutdown)
-		}
-
+		connectionShutdown := registerConnectionShutdown(
+			uniqueReference,
+			connectionApp,
+			self.ZapLogger,
+			self.CancellationContext,
+		)
+		_, _ = self.CancellationContext.Add(uniqueReference, connectionShutdown)
 	}
 	return self.GoFunctionCounter.GoRun(
 		"NetListenManager.acceptNewClientConnection.03",
@@ -152,7 +153,6 @@ func registerConnectionShutdown(
 	connectionId string,
 	connectionApp messages.IApp,
 	logger *zap.Logger,
-	onErr func(),
 	CancellationContext ...goCommsDefinitions.ICancellationContext,
 ) func(cancelCtx goCommsDefinitions.ICancellationContext) {
 	b := false
@@ -164,9 +164,6 @@ func registerConnectionShutdown(
 				logger.Error(
 					"Stopping error. not really a problem. informational",
 					zap.Error(errInGoRoutine))
-			}
-			if errInGoRoutine != nil {
-				onErr()
 			}
 			for _, instance := range CancellationContext {
 				_ = instance.Remove(connectionId)

@@ -66,10 +66,12 @@ func NewNetListenApp(
 					fx.Provide(fx.Annotated{Target: NewNetListenManager}),
 					fx.Provide(fx.Annotated{Target: netListenSettings.listenerAcceptFactory}),
 					fx.Provide(fx.Annotated{Target: netListenSettings.netListenerFactory}),
-					fx.Invoke(invokeListenForNewConnections),
+					fx.Invoke(InvokeStartConnectionManagerListenForConnections),
 				)
 				fxApp := fx.New(options)
-				return fxApp, cancelFunc, fxApp.Err()
+				return fxApp, func() {
+
+				}, fxApp.Err()
 			},
 		}
 	}

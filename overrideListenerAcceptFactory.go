@@ -6,7 +6,7 @@ import (
 )
 
 type overrideListenerAcceptFactory struct {
-	listenerAcceptFactory func(listener net.Listener) (ISshListenerAccept, error)
+	listenerAcceptFactory func(listener net.Listener) (IListenerAccept, error)
 }
 
 func (self *overrideListenerAcceptFactory) ApplyNetManagerSettings(settings *common.NetManagerSettings) error {
@@ -18,7 +18,7 @@ func (self *overrideListenerAcceptFactory) apply(settings *netListenManagerSetti
 	return nil
 }
 
-func NewOverrideListenerAcceptFactory(listenerAcceptFactory func(listener net.Listener) (ISshListenerAccept, error)) *overrideListenerAcceptFactory {
+func NewOverrideListenerAcceptFactory(listenerAcceptFactory func(listener net.Listener) (IListenerAccept, error)) *overrideListenerAcceptFactory {
 	return &overrideListenerAcceptFactory{
 		listenerAcceptFactory: listenerAcceptFactory,
 	}
