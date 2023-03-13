@@ -57,8 +57,8 @@ func NewNetListenApp(
 					ProvideCreateListenAcceptResource(),
 					ProvideCreateListenResource(),
 					fx.Invoke(InvokeStartConnectionManagerListenForConnections),
-					goCommsDefinitions.InvokeCancelContext(),
-					goCommsDefinitions.InvokeListenerClose(),
+					common.InvokeCancelContext(),
+					common.InvokeListenerClose(),
 				)
 				fxApp := fx.New(options)
 				return fxApp, func() {
