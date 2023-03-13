@@ -3,7 +3,6 @@ package goCommsNetListener
 import (
 	"context"
 	"fmt"
-	"github.com/bhbosman/goCommsDefinitions"
 	"github.com/bhbosman/gocommon/GoFunctionCounter"
 	"github.com/bhbosman/gocommon/Services/IFxService"
 	"github.com/bhbosman/gocommon/messages"
@@ -21,7 +20,7 @@ type NetListenManager struct {
 	netBase.ConnNetManager
 	Listener            IListenerAccept
 	MaxConnections      int
-	CancellationContext goCommsDefinitions.ICancellationContext
+	CancellationContext common.ICancellationContext
 }
 
 func (self *NetListenManager) ListenForNewConnections() error {
@@ -154,11 +153,11 @@ func registerConnectionShutdown(
 	connectionId string,
 	connectionApp messages.IApp,
 	logger *zap.Logger,
-	CancellationContext ...goCommsDefinitions.ICancellationContext,
-) func(cancelCtx goCommsDefinitions.ICancellationContext) {
+	CancellationContext ...common.ICancellationContext,
+) func(cancelCtx common.ICancellationContext) {
 	mutex := sync.Mutex{}
 	cancelCalled := false
-	return func(cancelCtx goCommsDefinitions.ICancellationContext) {
+	return func(cancelCtx common.ICancellationContext) {
 		mutex.Lock()
 		b := cancelCalled
 		cancelCalled = true
