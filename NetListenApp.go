@@ -23,9 +23,8 @@ func NewNetListenApp(
 			Callback: func() (messages.IApp, context.CancelFunc, error) {
 				cancelFunc := func() {}
 				netListenSettings := &netListenManagerSettings{
-					NetManagerSettings:    common.NewNetManagerSettings(512),
-					netListenerFactory:    ProvideCreateListenResource,
-					listenerAcceptFactory: ProvideCreateListenAcceptResource,
+					NetManagerSettings: common.NewNetManagerSettings(512),
+					netListenerFactory: ProvideCreateListenResource,
 				}
 
 				for _, setting := range settings {
@@ -62,9 +61,8 @@ func NewNetListenApp(
 					goCommsDefinitions.ProvideUrl("ConnectionUrl", ConnectionUrl),
 					goCommsDefinitions.ProvideUrl("ProxyUrl", ProxyUrl),
 					goCommsDefinitions.ProvideBool("UseProxy", UseProxy),
-
 					fx.Provide(fx.Annotated{Target: NewNetListenManager}),
-					fx.Provide(fx.Annotated{Target: netListenSettings.listenerAcceptFactory}),
+					fx.Provide(fx.Annotated{Target: ProvideCreateListenAcceptResource}),
 					fx.Provide(fx.Annotated{Target: netListenSettings.netListenerFactory}),
 					fx.Invoke(InvokeStartConnectionManagerListenForConnections),
 				)
