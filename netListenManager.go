@@ -13,7 +13,6 @@ import (
 	"go.uber.org/zap"
 	"golang.org/x/sync/semaphore"
 	"net"
-	"sync"
 )
 
 type NetListenManager struct {
@@ -133,13 +132,27 @@ func (self *NetListenManager) acceptNewClientConnection(
 			onErr()
 			return
 		}
-		connectionShutdown := registerConnectionShutdown(
+		_ = self.RegisterConnectionShutdown(
 			uniqueReference,
-			connectionApp,
-			self.ZapLogger,
+			func(
+				connectionApp messages.IApp,
+				logger *zap.Logger,
+			) func() {
+				return func() {
+					errInGoRoutine := connectionApp.Stop(context.Background())
+					if errInGoRoutine != nil {
+						logger.Error(
+							"Stopping error. not really a problem. informational",
+							zap.Error(errInGoRoutine))
+					}
+				}
+			}(
+				connectionApp,
+				self.ZapLogger,
+			),
 			self.CancellationContext,
+			cancellationContext,
 		)
-		_, _ = self.CancellationContext.Add(uniqueReference, connectionShutdown)
 	}
 	return self.GoFunctionCounter.GoRun(
 		"NetListenManager.acceptNewClientConnection.03",
@@ -147,33 +160,6 @@ func (self *NetListenManager) acceptNewClientConnection(
 	)
 	//vv()
 	//return nil
-}
-
-func registerConnectionShutdown(
-	connectionId string,
-	connectionApp messages.IApp,
-	logger *zap.Logger,
-	CancellationContext ...common.ICancellationContext,
-) func(cancelCtx common.ICancellationContext) {
-	mutex := sync.Mutex{}
-	cancelCalled := false
-	return func(cancelCtx common.ICancellationContext) {
-		mutex.Lock()
-		b := cancelCalled
-		cancelCalled = true
-		mutex.Unlock()
-		if !b {
-			errInGoRoutine := connectionApp.Stop(context.Background())
-			if errInGoRoutine != nil {
-				logger.Error(
-					"Stopping error. not really a problem. informational",
-					zap.Error(errInGoRoutine))
-			}
-			for _, instance := range CancellationContext {
-				_ = instance.Remove(connectionId)
-			}
-		}
-	}
 }
 
 func (self *NetListenManager) acceptWithContext() (net.Conn, context.CancelFunc, error) {
