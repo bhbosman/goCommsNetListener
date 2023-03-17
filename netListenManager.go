@@ -3,6 +3,7 @@ package goCommsNetListener
 import (
 	"context"
 	"fmt"
+	"github.com/bhbosman/goConn"
 	"github.com/bhbosman/gocommon/GoFunctionCounter"
 	"github.com/bhbosman/gocommon/Services/IFxService"
 	"github.com/bhbosman/gocommon/messages"
@@ -19,7 +20,7 @@ type NetListenManager struct {
 	netBase.ConnNetManager
 	Listener            IListenerAccept
 	MaxConnections      int
-	CancellationContext common.ICancellationContext
+	CancellationContext goConn.ICancellationContext
 }
 
 func (self *NetListenManager) ListenForNewConnections() error {

@@ -2,11 +2,11 @@ package goCommsNetListener
 
 import (
 	"context"
+	"github.com/bhbosman/goConn"
 	"github.com/bhbosman/goConnectionManager"
 	"github.com/bhbosman/gocommon/GoFunctionCounter"
 	"github.com/bhbosman/gocommon/Services/IFxService"
 	"github.com/bhbosman/gocommon/Services/interfaces"
-	"github.com/bhbosman/gocomms/common"
 	"github.com/bhbosman/gocomms/netBase"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
@@ -22,7 +22,7 @@ func NewNetListenManager(
 		ListenerAccept                           IListenerAccept
 		ConnectionManager                        goConnectionManager.IService
 		CancelCtx                                context.Context
-		CancellationContext                      common.ICancellationContext
+		CancellationContext                      goConn.ICancellationContext
 		Settings                                 *netListenManagerSettings
 		ZapLogger                                *zap.Logger
 		ConnectionName                           string `name:"ConnectionName"`
