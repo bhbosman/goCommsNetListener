@@ -133,7 +133,7 @@ func (self *NetListenManager) acceptNewClientConnection(
 			onErr()
 			return
 		}
-		_ = netBase.RegisterConnectionShutdown(
+		_ = goConn.RegisterConnectionShutdown(
 			uniqueReference,
 			func(
 				connectionApp messages.IApp,
