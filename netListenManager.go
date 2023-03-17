@@ -119,7 +119,7 @@ func (self *NetListenManager) acceptNewClientConnection(
 				connCancelFunc()
 			}
 			if cancellationContext != nil {
-				cancellationContext.Cancel()
+				cancellationContext.Cancel("123")
 			}
 			err = multierr.Append(err, conn.Close())
 		}
