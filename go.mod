@@ -4,20 +4,20 @@ go 1.18
 
 require (
 	github.com/bhbosman/goCommsDefinitions v0.0.0-20230313180751-41613a6b3173
+	github.com/bhbosman/goConn v0.0.0-20230317045429-06adbb778ab7
 	github.com/bhbosman/goConnectionManager v0.0.0-20230312204225-183859f3cef5
 	github.com/bhbosman/gocommon v0.0.0-20230312205650-25cf8341f1c9
 	github.com/bhbosman/gocomms v0.0.0-20220614200341-e167364b814f
 	github.com/golang/mock v1.6.0
 	go.uber.org/fx v1.19.2
 	go.uber.org/multierr v1.10.0
-	go.uber.org/zap v1.23.0
+	go.uber.org/zap v1.24.0
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 )
 
 require github.com/stretchr/testify v1.8.0 // indirect
 
 require (
-	github.com/bhbosman/goConn v0.0.0-20230317045429-06adbb778ab7 // indirect
 	github.com/bhbosman/goerrors v0.0.0-20220623084908-4d7bbcd178cf // indirect
 	github.com/bhbosman/gomessageblock v0.0.0-20230308173223-e8144f25444c // indirect
 	github.com/bhbosman/goprotoextra v0.0.2-0.20210817141206-117becbef7c7 // indirect

@@ -100,8 +100,10 @@ func (self *NetListenManager) acceptNewClientConnection(
 
 		namedLogger := self.ZapLogger.Named(uniqueReference)
 		ctx, cancelFunc := context.WithCancel(self.CancellationContext.CancelContext())
-		cancellationContext := goConn.NewCancellationContext(uniqueReference, cancelFunc, ctx, namedLogger, conn)
-
+		cancellationContext, err := goConn.NewCancellationContext(uniqueReference, cancelFunc, ctx, namedLogger, conn)
+		if err != nil {
+			return
+		}
 		connectionInstance := netBase.NewConnectionInstance(
 			self.ConnectionUrl,
 			self.UniqueSessionNumber,

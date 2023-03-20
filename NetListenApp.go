@@ -28,7 +28,10 @@ func NewNetListenApp(
 				}
 				namedLogger := params.ZapLogger.Named(name)
 				ctx, cancelFunc := context.WithCancel(params.ParentContext)
-				cancellationContext := goConn.NewCancellationContext(name, cancelFunc, ctx, namedLogger, nil)
+				cancellationContext, err := goConn.NewCancellationContext(name, cancelFunc, ctx, namedLogger, nil)
+				if err != nil {
+					return nil, nil, err
+				}
 
 				for _, setting := range settings {
 					if setting == nil {
