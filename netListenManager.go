@@ -98,22 +98,26 @@ func (self *NetListenManager) acceptNewClientConnection(
 			zap.String("Remote Address", conn.RemoteAddr().String()),
 			zap.String("LocalAddr Address", conn.LocalAddr().String()))
 
+		namedLogger := self.ZapLogger.Named(uniqueReference)
+		ctx, cancelFunc := context.WithCancel(self.CancellationContext.CancelContext())
+		cancellationContext := goConn.NewCancellationContext(uniqueReference, cancelFunc, ctx, namedLogger, conn)
+
 		connectionInstance := netBase.NewConnectionInstance(
 			self.ConnectionUrl,
 			self.UniqueSessionNumber,
 			self.ConnectionManager,
-			self.CancelCtx,
+			cancellationContext,
 			self.AdditionalFxOptionsForConnectionInstance,
-			self.ZapLogger,
+			namedLogger,
 		)
-		connectionApp, instanceAppCtx, cancellationContext, err := connectionInstance.NewConnectionInstance(
+		connectionApp, err := connectionInstance.NewConnectionInstance(
 			uniqueReference,
 			goFunctionCounter,
 			model.ServerConnection,
 			conn,
 		)
-		if instanceAppCtx != nil {
-			err = multierr.Append(err, instanceAppCtx.Err())
+		if err != nil {
+			cancellationContext.CancelWithError("sadsadasd", err)
 		}
 		onErr := func() {
 			if connCancelFunc != nil {

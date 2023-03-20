@@ -3,6 +3,7 @@ package goCommsNetListener
 import (
 	"context"
 	"github.com/bhbosman/goCommsDefinitions"
+	"github.com/bhbosman/goConn"
 	"github.com/bhbosman/gocommon/messages"
 	"github.com/bhbosman/gocomms/common"
 	"go.uber.org/fx"
@@ -20,11 +21,14 @@ func NewNetListenApp(
 	return func(params common.NetAppFuncInParams) messages.CreateAppCallback {
 		return messages.CreateAppCallback{
 			Name: name,
-			Callback: func() (messages.IApp, context.CancelFunc, error) {
+			Callback: func() (messages.IApp, goConn.ICancellationContext, error) {
 
 				netListenSettings := &netListenManagerSettings{
 					NetManagerSettings: common.NewNetManagerSettings(512),
 				}
+				namedLogger := params.ZapLogger.Named(name)
+				ctx, cancelFunc := context.WithCancel(params.ParentContext)
+				cancellationContext := goConn.NewCancellationContext(name, cancelFunc, ctx, namedLogger, nil)
 
 				for _, setting := range settings {
 					if setting == nil {
@@ -32,7 +36,7 @@ func NewNetListenApp(
 					}
 					err := setting.ApplyNetManagerSettings(&netListenSettings.NetManagerSettings)
 					if err != nil {
-						return nil, func() {}, err
+						return nil, cancellationContext, err
 					}
 				}
 
@@ -47,6 +51,8 @@ func NewNetListenApp(
 					name,
 					connectionInstancePrefix,
 					params,
+					cancellationContext,
+					namedLogger,
 					callbackForConnectionInstance,
 					fx.Options(netListenSettings.MoreOptions...),
 					fx.Supply(netListenSettings),
@@ -61,8 +67,7 @@ func NewNetListenApp(
 					common.InvokeListenerClose(),
 				)
 				fxApp := fx.New(options)
-				return fxApp, func() {
-				}, fxApp.Err()
+				return fxApp, cancellationContext, fxApp.Err()
 			},
 		}
 	}
