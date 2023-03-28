@@ -20,7 +20,7 @@ require github.com/stretchr/testify v1.8.0 // indirect
 require (
 	github.com/bhbosman/goerrors v0.0.0-20220623084908-4d7bbcd178cf // indirect
 	github.com/bhbosman/gomessageblock v0.0.0-20230308173223-e8144f25444c // indirect
-	github.com/bhbosman/goprotoextra v0.0.2-0.20210817141206-117becbef7c7 // indirect
+	github.com/bhbosman/goprotoextra v0.0.2 // indirect
 	github.com/cenkalti/backoff/v4 v4.1.1 // indirect
 	github.com/cskr/pubsub v1.0.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
@@ -50,7 +50,6 @@ replace github.com/bhbosman/gocomms => ../gocomms
 replace github.com/bhbosman/goMessages => ../goMessages
 
 //replace github.com/bhbosman/gocommon => ../gocommon
-
 
 replace github.com/bhbosman/goCommsDefinitions => ../goCommsDefinitions
 
