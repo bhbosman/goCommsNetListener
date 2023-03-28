@@ -1,12 +1,15 @@
 github.com/benbjohnson/clock v1.1.0/go.mod h1:J11/hYXuz8f4ySSvYwY0FKfm+ezbsZBKZxNJlLklBHA=
 github.com/benbjohnson/clock v1.3.0 h1:ip6w0uFQkncKQ979AypyG0ER7mqUSBdKLOgAle/AT8A=
 github.com/benbjohnson/clock v1.3.0/go.mod h1:J11/hYXuz8f4ySSvYwY0FKfm+ezbsZBKZxNJlLklBHA=
+github.com/bhbosman/goCommsDefinitions v0.0.0-20230308211643-24fe88b2378e/go.mod h1:tkd0ohtBBlomjgZrSj1K7YHT6zb0td0X6v6Tv/kn/wA=
+github.com/bhbosman/goCommsDefinitions v0.0.0-20230313180751-41613a6b3173 h1:RXYfi2gJvcEuaewfGT8GQkGp1v6nZnwIi6Q+RI94gkQ=
+github.com/bhbosman/goCommsDefinitions v0.0.0-20230313180751-41613a6b3173/go.mod h1:tkd0ohtBBlomjgZrSj1K7YHT6zb0td0X6v6Tv/kn/wA=
 github.com/bhbosman/gomessageblock v0.0.0-20230308173223-e8144f25444c h1:UQCbM3rXlsDsSpo6iJr0DeYRiEA7UT8+9UJkXwzI3kA=
 github.com/bhbosman/gomessageblock v0.0.0-20230308173223-e8144f25444c/go.mod h1:TZ2IkIqXD6cRPBNJYUlLC4V11cwB6KoO984OAcL9blI=
 github.com/bhbosman/gomock v1.6.1-0.20230302060806-d02c40b7514e h1:9ZZLTcBpRq0gCtFml4/M9EQ3E5sQoHIBRk0yLpuVFVQ=
 github.com/bhbosman/gomock v1.6.1-0.20230302060806-d02c40b7514e/go.mod h1:YKHw244p9LQrfV48xfFMiAVbFE2qjBuU1OHTNjXwboE=
-github.com/bhbosman/goprotoextra v0.0.0-20230309055846-4d9940f8b875 h1:nrzKkjlpMiSxJcuv9C/Yju5LdNZ9zJ3HvAjx5/LFS6o=
-github.com/bhbosman/goprotoextra v0.0.0-20230309055846-4d9940f8b875/go.mod h1:D2tgv3GCgQjX9hGTyx0n55Dk6rcnreYcwoo0FH1y1As=
+github.com/bhbosman/goprotoextra v0.0.2 h1:LEEUuDa7X7ojAP56dw5SDoiYnTrErpjI7Bp25Q9Nw2I=
+github.com/bhbosman/goprotoextra v0.0.2/go.mod h1:Jt+JnplitvFQLYeUKIuBnc+5aHBtRtvze8Hce0gMXiM=
 github.com/cenkalti/backoff/v4 v4.0.0/go.mod h1:eEew/i+1Q6OrCDZh3WiXYv3+nJwBASZ8Bog/87DQnVg=
 github.com/cenkalti/backoff/v4 v4.1.1 h1:G2HAfAmvm/GcKan2oOQpBXOd2tT2G57ZnZGWa1PxPBQ=
 github.com/cenkalti/backoff/v4 v4.1.1/go.mod h1:scbssz8iZGpm3xbr14ovlUdkxfGXNInqkPWOWmG2CLw=
