@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/bhbosman/goCommsDefinitions v0.0.0-20230313180751-41613a6b3173
-	github.com/bhbosman/goConn v0.0.0-20230320102125-d7416dd8d6dc
+	github.com/bhbosman/goConn v0.0.0-20230327111455-7a39299fb0aa
 	github.com/bhbosman/goConnectionManager v0.0.0-20230312204225-183859f3cef5
 	github.com/bhbosman/gocommon v0.0.0-20230328150634-566a0f916878
 	github.com/bhbosman/gocomms v0.0.0-20220614200341-e167364b814f
