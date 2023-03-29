@@ -3,7 +3,7 @@ package goCommsNetListener
 import (
 	"context"
 	"github.com/bhbosman/goCommsDefinitions"
-	"github.com/bhbosman/goConn"
+	"github.com/bhbosman/gocommon"
 	"github.com/bhbosman/gocomms/common"
 	"go.uber.org/fx"
 	"net/url"
@@ -17,17 +17,17 @@ func NewNetListenApp(
 	ProxyUrl *url.URL,
 	ConnectionUrl *url.URL,
 	settings ...common.INetManagerSettingsApply) common.NetAppFuncInParamsCallback {
-	return func(params common.NetAppFuncInParams) goConn.CreateAppCallback {
-		return goConn.CreateAppCallback{
+	return func(params common.NetAppFuncInParams) gocommon.CreateAppCallback {
+		return gocommon.CreateAppCallback{
 			Name: name,
-			Callback: func() (goConn.IApp, goConn.ICancellationContext, error) {
+			Callback: func() (gocommon.IApp, gocommon.ICancellationContext, error) {
 
 				netListenSettings := &netListenManagerSettings{
 					NetManagerSettings: common.NewNetManagerSettings(512),
 				}
 				namedLogger := params.ZapLogger.Named(name)
 				ctx, cancelFunc := context.WithCancel(params.ParentContext)
-				cancellationContext, err := goConn.NewCancellationContextNoCloser(name, cancelFunc, ctx, namedLogger)
+				cancellationContext, err := gocommon.NewCancellationContextNoCloser(name, cancelFunc, ctx, namedLogger)
 				if err != nil {
 					return nil, nil, err
 				}

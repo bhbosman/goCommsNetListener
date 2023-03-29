@@ -3,7 +3,7 @@ package goCommsNetListener
 import (
 	"context"
 	"fmt"
-	"github.com/bhbosman/goConn"
+	"github.com/bhbosman/gocommon"
 	"github.com/bhbosman/gocommon/GoFunctionCounter"
 	"github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocommon/services/IFxService"
@@ -19,7 +19,7 @@ type NetListenManager struct {
 	netBase.ConnNetManager
 	Listener            IListenerAccept
 	MaxConnections      int
-	CancellationContext goConn.ICancellationContext
+	CancellationContext gocommon.ICancellationContext
 }
 
 func (self *NetListenManager) ListenForNewConnections() error {
@@ -99,7 +99,7 @@ func (self *NetListenManager) acceptNewClientConnection(
 
 		namedLogger := self.ZapLogger.Named(uniqueReference)
 		ctx, cancelFunc := context.WithCancel(self.CancellationContext.CancelContext())
-		cancellationContext, err := goConn.NewCancellationContext(uniqueReference, cancelFunc, ctx, namedLogger, conn)
+		cancellationContext, err := gocommon.NewCancellationContext(uniqueReference, cancelFunc, ctx, namedLogger, conn)
 		if err != nil {
 			return
 		}
@@ -138,10 +138,10 @@ func (self *NetListenManager) acceptNewClientConnection(
 			onErr()
 			return
 		}
-		_ = goConn.RegisterConnectionShutdown(
+		_ = gocommon.RegisterConnectionShutdown(
 			uniqueReference,
 			func(
-				connectionApp goConn.IApp,
+				connectionApp gocommon.IApp,
 				logger *zap.Logger,
 			) func() {
 				return func() {
