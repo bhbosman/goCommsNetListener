@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/bhbosman/goConn"
 	"github.com/bhbosman/gocommon/GoFunctionCounter"
-	"github.com/bhbosman/gocommon/messages"
 	"github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocommon/services/IFxService"
 	"github.com/bhbosman/gocomms/common"
@@ -142,7 +141,7 @@ func (self *NetListenManager) acceptNewClientConnection(
 		_ = goConn.RegisterConnectionShutdown(
 			uniqueReference,
 			func(
-				connectionApp messages.IApp,
+				connectionApp goConn.IApp,
 				logger *zap.Logger,
 			) func() {
 				return func() {
