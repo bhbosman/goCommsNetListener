@@ -12,6 +12,8 @@ github.com/bhbosman/goConnectionManager v0.0.0-20250308054322-587c786bedb0 h1:Xd
 github.com/bhbosman/goConnectionManager v0.0.0-20250308054322-587c786bedb0/go.mod h1:IPFrgfmxCXp1Vvvzn0VhX+rsLlCfoUIOdowkTvNmYZM=
 github.com/bhbosman/goConnectionManager v0.0.0-20250308072343-5ecf88215e38 h1:82LWGEM9SPvd/mp6T/v/lYm07IypmGtfX8fP5i0cYd4=
 github.com/bhbosman/goConnectionManager v0.0.0-20250308072343-5ecf88215e38/go.mod h1:lD80UgopARIvGKA6vdCE4d2csy/AoOlFxnpx+EoOXtc=
+github.com/bhbosman/goConnectionManager v0.0.0-20250308122653-53a96fe357f2 h1:g2CUTrG6dGqVw7888o7ZQhYTZlUMEN9h1rEzMf6zqA8=
+github.com/bhbosman/goConnectionManager v0.0.0-20250308122653-53a96fe357f2/go.mod h1:3vN5ENCKucbzUATz5ecAUqwF/M7L9lZ5We4Ypevt2c8=
 github.com/bhbosman/gocommon v0.0.0-20250308052839-0ebeb121f996 h1:J4LPhDOOJ/tIJscYU6vNy2V1CzVflIHTJMYdN9gtGqg=
 github.com/bhbosman/gocommon v0.0.0-20250308052839-0ebeb121f996/go.mod h1:PcUe1UZjlmyuDrh2cEzNAgi+BQEV10LWktEL2C9BRS0=
 github.com/bhbosman/gocommon v0.0.0-20250308071735-43b385b00819 h1:B+7lAu+nnm9PI6M2ltgAD10Ay1H6StjvFEIVmmgZx4U=
@@ -21,6 +23,8 @@ github.com/bhbosman/gocomms v0.0.0-20250308053431-cfd3e830d8a5 h1:XLbRBpGbpeSQja
 github.com/bhbosman/gocomms v0.0.0-20250308053431-cfd3e830d8a5/go.mod h1:Ahez8GZuD9X3bGcGb45IOK2gIgRE2Pquod8NImb1D50=
 github.com/bhbosman/gocomms v0.0.0-20250308073453-53d6befb6d1a h1:G624DLsYNSEz7tc4pN49Ii+KHjNHlAty1oi0D2LgFIo=
 github.com/bhbosman/gocomms v0.0.0-20250308073453-53d6befb6d1a/go.mod h1:jkDgfw9i8Jt/Ym5pxnPSxiGFifB6/LlVrAB9nMi6rXA=
+github.com/bhbosman/gocomms v0.0.0-20250308122654-329e339db0e0 h1:umKod1Go+wqmTyPQvgq8tKqazoveIH8bjvp+6niTXWc=
+github.com/bhbosman/gocomms v0.0.0-20250308122654-329e339db0e0/go.mod h1:F6u+tEfFctybgOv6ojaCQoZ9Gioa4f3bGnq0T8HvPZc=
 github.com/bhbosman/goerrors v0.0.0-20250307194237-312d070c8e38 h1:3jX77BrDYvQ4xiAQkat+N47OZoKECB9t27fQQfpqGRk=
 github.com/bhbosman/goerrors v0.0.0-20250307194237-312d070c8e38/go.mod h1:2aeMPIIYjD7+5AmN1yaV/oAqCaExRDcl7SN+/zFLpew=
 github.com/bhbosman/gomessageblock v0.0.0-20250307141417-ab783e8e2eba h1:BcXupDmD6uRluJ1whSXNXMLaDV1HtBlFrwa8OsZgT8E=
@@ -35,6 +39,7 @@ github.com/bhbosman/goprotoextra v0.0.2 h1:LEEUuDa7X7ojAP56dw5SDoiYnTrErpjI7Bp25
 github.com/bhbosman/goprotoextra v0.0.2/go.mod h1:Jt+JnplitvFQLYeUKIuBnc+5aHBtRtvze8Hce0gMXiM=
 github.com/bhbosman/pubsub v1.0.3-0.20220802200819-029949e8a8af h1:OkZ6Yjh5lWL1cD6FTeHe+cBCiWS+ofJYwlO/GUx880c=
 github.com/bhbosman/pubsub v1.0.3-0.20220802200819-029949e8a8af/go.mod h1:uflhLeXzvTqu2aIOB7S7LvtVBnLzDluyHbBYwrPZfWc=
+github.com/bhbosman/pubsub v1.0.3-0.20250308124829-e5731aa33222 h1:cHtirgrswJP8goqbY1edxxFUIWcwo9+fVKWR1LAoijo=
 github.com/bhbosman/pubsub v1.0.3-0.20250308124829-e5731aa33222/go.mod h1:k9O2AJEIxJfyjM6xKczmuBumvRC+Pee76jW4Ir0+nTU=
 github.com/cenkalti/backoff/v4 v4.0.0/go.mod h1:eEew/i+1Q6OrCDZh3WiXYv3+nJwBASZ8Bog/87DQnVg=
 github.com/cenkalti/backoff/v4 v4.3.0 h1:MyRJ/UdXutAwSAT+s3wNd7MfTIcy71VQueUuFK343L8=
