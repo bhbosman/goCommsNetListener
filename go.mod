@@ -3,7 +3,7 @@ module github.com/bhbosman/goCommsNetListener
 go 1.24.0
 
 require (
-	github.com/bhbosman/goCommsDefinitions v0.0.0-20250308074916-3e7c0d32b971
+	github.com/bhbosman/goCommsDefinitions v0.0.0-20250308144130-64993b60920c
 	github.com/bhbosman/goConnectionManager v0.0.0-20250308133907-06eddcd798f6
 	github.com/bhbosman/gocommon v0.0.0-20250308131803-28622f55deb1
 	github.com/bhbosman/gocomms v0.0.0-20250308133812-cb1afb4044ed
@@ -36,4 +36,5 @@ require (
 )
 
 replace github.com/golang/mock => github.com/bhbosman/gomock v1.6.1-0.20250308071159-4cf72f668c72
+
 replace github.com/cskr/pubsub => github.com/bhbosman/pubsub v1.0.3-0.20250308124829-e5731aa33222
