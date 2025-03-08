@@ -4,9 +4,9 @@ go 1.24.0
 
 require (
 	github.com/bhbosman/goCommsDefinitions v0.0.0-20250308000247-4306925b3dfd
-	github.com/bhbosman/goConnectionManager v0.0.0-20250307224538-a79ceb218fd0
+	github.com/bhbosman/goConnectionManager v0.0.0-20250308054322-587c786bedb0
 	github.com/bhbosman/gocommon v0.0.0-20250308052839-0ebeb121f996
-	github.com/bhbosman/gocomms v0.0.0-20250308000247-0dafbc2926a9
+	github.com/bhbosman/gocomms v0.0.0-20250308053431-cfd3e830d8a5
 	github.com/golang/mock v1.6.0
 	go.uber.org/fx v1.23.0
 	go.uber.org/multierr v1.11.0
