@@ -5,10 +5,10 @@ go 1.23.0
 toolchain go1.24.0
 
 require (
-	github.com/bhbosman/goCommsDefinitions v0.0.0-20230730212737-00ad0cf16194
+	github.com/bhbosman/goCommsDefinitions v0.0.0-20250308000247-4306925b3dfd
 	github.com/bhbosman/goConnectionManager v0.0.0-20250307224538-a79ceb218fd0
-	github.com/bhbosman/gocommon v0.0.0-20250307235859-f370cb0a3bac
-	github.com/bhbosman/gocomms v0.0.0-20230730212408-04ba72ddb372
+	github.com/bhbosman/gocommon v0.0.0-20250308052839-0ebeb121f996
+	github.com/bhbosman/gocomms v0.0.0-20250308000247-0dafbc2926a9
 	github.com/golang/mock v1.6.0
 	go.uber.org/fx v1.23.0
 	go.uber.org/multierr v1.11.0
