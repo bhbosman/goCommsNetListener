@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/bhbosman/goCommsDefinitions v0.0.0-20250308144130-64993b60920c
 	github.com/bhbosman/goConnectionManager v0.0.0-20250308145438-ea83361668a5
-	github.com/bhbosman/gocommon v0.0.0-20250308131803-28622f55deb1
+	github.com/bhbosman/gocommon v0.0.0-20250308150148-56b7e6e14bff
 	github.com/bhbosman/gocomms v0.0.0-20250308133812-cb1afb4044ed
 	github.com/golang/mock v1.6.0
 	go.uber.org/fx v1.23.0
