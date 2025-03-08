@@ -3,7 +3,7 @@ module github.com/bhbosman/goCommsNetListener
 go 1.24.0
 
 require (
-	github.com/bhbosman/goCommsDefinitions v0.0.0-20250308000247-4306925b3dfd
+	github.com/bhbosman/goCommsDefinitions v0.0.0-20250308074916-3e7c0d32b971
 	github.com/bhbosman/goConnectionManager v0.0.0-20250308072343-5ecf88215e38
 	github.com/bhbosman/gocommon v0.0.0-20250308071735-43b385b00819
 	github.com/bhbosman/gocomms v0.0.0-20250308073453-53d6befb6d1a
@@ -18,7 +18,7 @@ require github.com/stretchr/testify v1.10.0 // indirect
 
 require (
 	github.com/bhbosman/goerrors v0.0.0-20250307194237-312d070c8e38 // indirect
-	github.com/bhbosman/gomessageblock v0.0.0-20250307141417-ab783e8e2eba // indirect
+	github.com/bhbosman/gomessageblock v0.0.0-20250308073733-0b3daca12e3a // indirect
 	github.com/bhbosman/goprotoextra v0.0.2 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cskr/pubsub v1.0.2 // indirect
