@@ -6,7 +6,7 @@ require (
 	github.com/bhbosman/goCommsDefinitions v0.0.0-20250308144130-64993b60920c
 	github.com/bhbosman/goConnectionManager v0.0.0-20250308150558-5d463bc5c9e3
 	github.com/bhbosman/gocommon v0.0.0-20250308150148-56b7e6e14bff
-	github.com/bhbosman/gocomms v0.0.0-20250308150300-a1d5009c77b1
+	github.com/bhbosman/gocomms v0.0.0-20250308152759-52892cbe374f
 	github.com/golang/mock v1.6.0
 	go.uber.org/fx v1.23.0
 	go.uber.org/multierr v1.11.0
