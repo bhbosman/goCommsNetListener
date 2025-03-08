@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/bhbosman/goCommsDefinitions v0.0.0-20250308144130-64993b60920c
-	github.com/bhbosman/goConnectionManager v0.0.0-20250308133907-06eddcd798f6
+	github.com/bhbosman/goConnectionManager v0.0.0-20250308145438-ea83361668a5
 	github.com/bhbosman/gocommon v0.0.0-20250308131803-28622f55deb1
 	github.com/bhbosman/gocomms v0.0.0-20250308133812-cb1afb4044ed
 	github.com/golang/mock v1.6.0
