@@ -7,7 +7,7 @@ toolchain go1.24.0
 require (
 	github.com/bhbosman/goCommsDefinitions v0.0.0-20230730212737-00ad0cf16194
 	github.com/bhbosman/goConnectionManager v0.0.0-20250307224538-a79ceb218fd0
-	github.com/bhbosman/gocommon v0.0.0-20230507180205-b30f653fb84c
+	github.com/bhbosman/gocommon v0.0.0-20250307235859-f370cb0a3bac
 	github.com/bhbosman/gocomms v0.0.0-20230730212408-04ba72ddb372
 	github.com/golang/mock v1.6.0
 	go.uber.org/fx v1.23.0
